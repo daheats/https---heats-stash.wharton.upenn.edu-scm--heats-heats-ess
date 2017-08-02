@@ -1,0 +1,17 @@
+---
+- name: Install Splunk Forwarder 6.4.5 Linux
+  hosts: test
+  become: false
+  user: heats
+  tags: splunk
+
+- name: Download splunkforwarder-6.4.5-e82289930bdd-linux-2.6-x86_64.rpm
+  get_url: 
+    url: https://s3.us-east-2.amazonaws.com/whessansibleinstallers/Linux/splunkforwarder-6.4.5-e82289930bdd-linux-2.6-x86_64+(1).rpm
+    dest: /usr/src/
+    mode: 0700
+
+- name: Install Splunk Forwarder  
+  yum:
+     name: /usr/src/splunkforwarder-6.4.5-e82289930bdd-linux-2.6-x86_64+(1).rpm
+     state: present 

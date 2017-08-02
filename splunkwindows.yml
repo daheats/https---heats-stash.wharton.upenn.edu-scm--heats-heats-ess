@@ -1,0 +1,16 @@
+---
+- name: Install Splunk Forwarder 6.4.5 Windows 
+  hosts: test
+  become: false
+  user: heats
+  tags: splunk
+
+- name: Download splunkforwarder-6.4.5-e82289930bdd-x64-release.msi
+  win_get_url: 
+    url: https://s3.us-east-2.amazonaws.com/whessansibleinstallers/Windows/splunkforwarder-6.4.5-e82289930bdd-x64-release.msi
+    dest: c:\Program Files\Common Files\Splunk645.msi
+
+- name: Install Splunk Forwarder  
+  win_package:
+     path: c:\Program Files\Common Files\Splunk645.msi  
+     state: present 
